@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="538cd242-51d4-4bf4-a453-b761e7000922" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<flow name="mainflow" doc:id="20886fea-ea8e-4b1e-9237-75dc22a87d32" >
+		<http:listener doc:name="Listener" doc:id="1d4225da-a9d9-4498-9000-006edf1aa50e" path="/flows" config-ref="HTTP_Listener_config"/>
+		<logger level="INFO" doc:name="mainLogger" doc:id="7e73ba43-196f-4c20-8dc3-325e7e81d93f" message="Hi"/>
+		<flow-ref doc:name="Flow Reference to subflow" doc:id="6b821c6d-53ef-43de-8504-3cbdc1faa83d" name="flowsSub_Flow"/>
+		<logger level="INFO" doc:name="second mainlog" doc:id="08778664-0412-4869-ba1e-4e94895549b4" message="This is subflow"/>
+		<flow-ref doc:name="Flow Reference for privateflow" doc:id="e711e676-236a-4a9b-89c6-d36868e61903" name="privateflow"/>
+	</flow>
+	<flow name="privateflow" doc:id="131831b1-c229-410d-bea0-99c08e9fb935" >
+		<logger level="INFO" doc:name="Logger" doc:id="c29b7167-36bf-46eb-96fc-6932680f78f8" message="This is private flow"/>
+	</flow>
+	<sub-flow name="flowsSub_Flow" doc:id="99a10bc1-eafd-4ae0-a5b6-28c609e8d969" >
+		<logger level="INFO" doc:name="Logger" doc:id="64e7aa6f-8290-49a6-bc79-ed85b20b1be2" message="This is subflow"/>
+	</sub-flow>
+</mule>
