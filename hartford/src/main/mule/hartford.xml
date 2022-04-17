@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<flow name="hartfordFlow1" doc:id="40a112bc-6570-4e7c-893e-d9aab390337d" >
+		<logger level="INFO" doc:name="Logger" doc:id="19a6a946-b65e-482b-9c33-ee33b39a7817" />
+	</flow>
+	<flow name="hartfordFlow2" doc:id="2600117f-72c6-4e4c-a2c2-250faa52bb99" >
+	</flow>
+	<flow name="hartfordFlow" doc:id="7753ce3a-8443-4d88-bd5e-d0d455d03cef" >
+		<http:listener doc:name="Listener" doc:id="d612d4d4-f6ee-47e2-be13-813eb361a8cb" />
+	</flow>
+</mule>
