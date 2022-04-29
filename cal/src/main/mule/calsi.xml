@@ -124,6 +124,8 @@ output application/json
         </error-handler>
     </flow>
     <flow name="put:\division:calsi-config">
+		<set-variable value="#[attributes.queryParams.number1]" doc:name="Set Variable" doc:id="14a2e488-6b72-4ec3-8f3f-f91b198425ea" variableName="number1"/>
+		<set-variable value="#[attributes.queryParams.number2]" doc:name="Set Variable" doc:id="5fcfd88e-6662-4b6c-8123-c55af71ea0bf" variableName="number2"/>
 		<ee:transform>
             <ee:message>
                 <ee:set-payload><![CDATA[%dw 2.0
@@ -131,7 +133,7 @@ output application/json
 ---
 
 {
-	
+	"Division ": vars.number1 / vars.number2
 }]]></ee:set-payload>
             </ee:message>
         </ee:transform>
