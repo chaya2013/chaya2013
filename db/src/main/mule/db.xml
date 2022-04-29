@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:db="http://www.mulesoft.org/schema/mule/db" xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd
+http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="57e3a485-f6c2-4b06-bbe8-925e5c8dd17e" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<db:config name="Database_Config" doc:name="Database Config" doc:id="5952c30b-4269-40d1-b10a-a7b0e0387090" >
+		<db:my-sql-connection host="localhost" port="3306" user="root" password="Chase4321." database="emp" />
+	</db:config>
+	<flow name="dbFlow" doc:id="b6c331dd-f641-468f-a850-e3c9e6249ffc" >
+		<http:listener doc:name="Listener" doc:id="e859eb32-384a-42a0-aeb2-fc01f0c96426" config-ref="HTTP_Listener_config" path="db"/>
+		<ee:transform doc:name="Transform Message" doc:id="ca3d16cc-b49f-4954-941c-f7fcdb3cbfcf" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+1 to 10 map
+{
+ID: 1 + $ ,
+Name: "chaya",
+Age: 20
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<db:insert doc:name="Insert" doc:id="87793c12-ba63-46f3-a63a-8bc12a3b3ae7" config-ref="Database_Config">
+			<db:sql ><![CDATA[Insert into student (ID,Name,Age)
+values(:ID, :Name, :Age)]]></db:sql>
+		</db:insert>
+	</flow>
+</mule>
